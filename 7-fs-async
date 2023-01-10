@@ -1,0 +1,20 @@
+const {readFile, writeFile} = require('fs')
+
+readFile('./newFolder/subFolder2/first.txt', 'utf-8', (err, result) => {
+  if (err) {
+    console.log(err);
+    return;
+  } else {
+    let first = result;
+    readFile('./newFolder/subFolder2/second.txt', 'utf-8', (err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        let second = result;
+        writeFile('./newFolder/subFolder2/async-result', `${first} ++ ${second}`,
+        {}, () => console.log('kos'))
+      }
+    })
+  }
+})
